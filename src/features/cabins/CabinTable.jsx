@@ -73,6 +73,7 @@ export default function CabinTable(){
 const from = (currPage - 1) * CABIN_TABLE_SIZE; //standard formula for paginations
 const to = from + CABIN_TABLE_SIZE -1;
 
+//this is done to avoid pagination bug...we cant stay on say page 3 when we have only as much content as 2 pages
 if(currPage > Math.ceil(sortedValues.length / CABIN_TABLE_SIZE)){
   navigate(`/cabins?page=1&discount=${filterApplied}&sortby=${sortApplied}`)
 }
