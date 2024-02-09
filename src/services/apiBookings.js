@@ -110,3 +110,36 @@ export async function deleteBooking(id) {
   }
   return data;
 }
+
+export async function insertBooking({startDate, endDate, numNights, numGuests, cabinPrice, extrasPrice, totalPrice, status, hasBreakfast, isPaid, observations, cabins, guests}){
+  
+    const { data, error } = await supabase
+    .from('bookings')
+    .insert([
+      { startDate: startDate, endDate: endDate, numNights: numNights, numGuests: numGuests, cabinPrice: cabinPrice, extrasPrice: extrasPrice, totalPrice: totalPrice,  status: status, hasBreakfast: hasBreakfast, isPaid: isPaid, observations: observations, cabinId: cabins.id, guestId: guests.id},
+    ])
+    .select()
+
+    if (error) {
+      console.error(error);
+      throw new Error("Booking could not be added");
+    }
+    return data
+
+}
+
+// export async function insertBooking(booking){
+//   console.log("data from apiBookings", {...booking})
+//   const { data, error } = await supabase
+//   .from('bookings')
+//   .insert({...booking})
+//   .select()
+
+//   if (error) {
+//     console.error(error);
+//     throw new Error("Booking could not be added");
+//   }
+//   return data
+
+// }
+

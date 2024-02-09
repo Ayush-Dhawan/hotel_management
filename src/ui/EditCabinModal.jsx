@@ -6,6 +6,8 @@ import {createPortal} from 'react-dom'
 import ConfirmDelete from './ConfirmDelete';
 import useDeleteCabin from '../features/cabins/useDeleteCabin';
 import { useDeleteBookings } from '../features/bookings/useDeleteBookings';
+import useDeleteRequest from '../features/requests/useDeleteRequest';
+
 // import Button  from './Button';
 
 const StyledModal = styled.div`
@@ -60,6 +62,7 @@ const Button = styled.button`
 export default function EditCabinModal({showModal, cabin, type, id}) {
   const {isDeleting, deleteCabin} = useDeleteCabin();
   const {isDeleting: isDeletingBooking, deleteBooking} = useDeleteBookings();
+  const {isDeletingRequest, deleteRequest} = useDeleteRequest()
   const ref = useRef();
 
   useEffect(() =>{
@@ -94,6 +97,16 @@ if(type === "edit"){
         <StyledModal ref={ref}>
             <Button onClick={() => showModal(false)}>❌</Button>
             <ConfirmDelete resourceName="booking" disabled={isDeletingBooking} onConfirm={() => deleteBooking(id)} showModal={showModal} />
+         </StyledModal>
+    </Overlay>
+  )
+}
+else if(type === "deleteRequest"){
+  return (
+    <Overlay>
+        <StyledModal ref={ref}>
+            <Button onClick={() => showModal(false)}>❌</Button>
+            <ConfirmDelete resourceName="request" disabled={isDeletingRequest} onConfirm={() => deleteRequest(id)} showModal={showModal} />
          </StyledModal>
     </Overlay>
   )
