@@ -13,6 +13,9 @@ import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import {useNavigate} from 'react-router-dom'
 import { useCheckout } from "./useCheckout";
+import { useDeleteBookings } from "./useDeleteBookings";
+import { useState } from "react";
+import EditCabinModal from "../../ui/EditCabinModal";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -23,6 +26,8 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const {isLoading, booking}= useBooking();
   const navigate = useNavigate();
+  const [modalType, setModalType] = useState("")
+  const [showForm, setShowForm] = useState(false);
 
   let bookingId
   let status
@@ -33,11 +38,16 @@ function BookingDetail() {
   }
 
   const {checkout, isCheckingOut} = useCheckout();
+  const {deleteBooking, isDeleting} = useDeleteBookings();
 
   const moveBack = useMoveBack(); 
 
   function handleCheckout(){
     checkout(bookingId)
+  }
+
+  function handleDelete(){
+      deleteBooking(bookingId)
   }
 
   
@@ -67,13 +77,18 @@ function BookingDetail() {
       Check-in
     </Button>}
     {status === 'checked-in' &&
-      <Button variation="primary" onClick={handleCheckout}>
+      <Button disabled={isCheckingOut} variation="primary" onClick={handleCheckout}>
       Check-out
     </Button>}
+    <Button disabled={isDeleting} variation="secondary" onClick={() =>{setShowForm(!showForm); setModalType((modalType) => "deleteBooking")}}>
+          Delete
+        </Button>
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>
       </ButtonGroup>
+
+      {showForm && <EditCabinModal showModal={setShowForm}  type={modalType} id={bookingId} />}
     </>
   );
 }

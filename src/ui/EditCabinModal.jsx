@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {createPortal} from 'react-dom'
 import ConfirmDelete from './ConfirmDelete';
 import useDeleteCabin from '../features/cabins/useDeleteCabin';
+import { useDeleteBookings } from '../features/bookings/useDeleteBookings';
 // import Button  from './Button';
 
 const StyledModal = styled.div`
@@ -58,6 +59,7 @@ const Button = styled.button`
 
 export default function EditCabinModal({showModal, cabin, type, id}) {
   const {isDeleting, deleteCabin} = useDeleteCabin();
+  const {isDeleting: isDeletingBooking, deleteBooking} = useDeleteBookings();
   const ref = useRef();
 
   useEffect(() =>{
@@ -77,12 +79,21 @@ if(type === "edit"){
          </StyledModal>
     </Overlay>
   )
-}  else if(type == "delete"){
+}  else if(type === "delete"){
   return (
     <Overlay>
         <StyledModal ref={ref}>
             <Button onClick={() => showModal(false)}>❌</Button>
             <ConfirmDelete resourceName="cabins" disabled={isDeleting} onConfirm={() => deleteCabin(id)} showModal={showModal} />
+         </StyledModal>
+    </Overlay>
+  )
+} else if(type === "deleteBooking"){
+  return (
+    <Overlay>
+        <StyledModal ref={ref}>
+            <Button onClick={() => showModal(false)}>❌</Button>
+            <ConfirmDelete resourceName="booking" disabled={isDeletingBooking} onConfirm={() => deleteBooking(id)} showModal={showModal} />
          </StyledModal>
     </Overlay>
   )

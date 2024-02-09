@@ -63,7 +63,7 @@ function BookingTable() {
 
   // If current page is greater than the available pages, navigate to the first page
   //this is done to avoid pagination bug...we cant stay on say page 3 when we have only as much content as 2 pages
-  if (currPage > Math.ceil(sortedValues.length / PAGE_SIZE)) {
+  if (sortedValues && currPage > Math.ceil(sortedValues.length / PAGE_SIZE)) {
    navigate(`/bookings?page=1&status=${status}&sortby=${sortType}`);
  }
 

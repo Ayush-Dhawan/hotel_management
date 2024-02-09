@@ -60,7 +60,7 @@ const PaginationButton = styled.button`
 
 
 
-export default function Pagination({count, SIZE}) {
+export default function Pagination({count = 5, SIZE}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currPage = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
   const pageCount = Math.ceil(count / SIZE)

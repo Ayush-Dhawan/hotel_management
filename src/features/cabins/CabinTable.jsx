@@ -74,7 +74,7 @@ const from = (currPage - 1) * CABIN_TABLE_SIZE; //standard formula for paginatio
 const to = from + CABIN_TABLE_SIZE -1;
 
 //this is done to avoid pagination bug...we cant stay on say page 3 when we have only as much content as 2 pages
-if(currPage > Math.ceil(sortedValues.length / CABIN_TABLE_SIZE)){
+if(sortedValues && currPage > Math.ceil(sortedValues.length / CABIN_TABLE_SIZE)){
   navigate(`/cabins?page=1&discount=${filterApplied}&sortby=${sortApplied}`)
 }
 const cabinsInRange = sortedValues?.slice(from, to+1) //render the slice of total values from and to+1
