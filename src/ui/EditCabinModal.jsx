@@ -7,6 +7,7 @@ import ConfirmDelete from './ConfirmDelete';
 import useDeleteCabin from '../features/cabins/useDeleteCabin';
 import { useDeleteBookings } from '../features/bookings/useDeleteBookings';
 import useDeleteRequest from '../features/requests/useDeleteRequest';
+import useDeleteGuests from '../features/requests/useDeleteGuests';
 
 // import Button  from './Button';
 
@@ -59,10 +60,14 @@ const Button = styled.button`
   }
 `;
 
-export default function EditCabinModal({showModal, cabin, type, id}) {
+
+
+export default function EditCabinModal({showModal, cabin, type, id, email}) {
   const {isDeleting, deleteCabin} = useDeleteCabin();
-  const {isDeleting: isDeletingBooking, deleteBooking} = useDeleteBookings();
   const {isDeletingRequest, deleteRequest} = useDeleteRequest()
+  const {deleteGuest, isDeletingGuest} = useDeleteGuests();
+  const {isDeleting: isDeletingBooking, deleteBooking} = useDeleteBookings();
+
   const ref = useRef();
 
   useEffect(() =>{
@@ -96,7 +101,10 @@ if(type === "edit"){
     <Overlay>
         <StyledModal ref={ref}>
             <Button onClick={() => showModal(false)}>❌</Button>
-            <ConfirmDelete resourceName="booking" disabled={isDeletingBooking} onConfirm={() => deleteBooking(id)} showModal={showModal} />
+            <ConfirmDelete resourceName="booking" disabled={isDeletingBooking}  onConfirm={()=>{deleteBooking(id); 
+   setTimeout(() => {
+    deleteGuest(email)
+   }, 2000);}} showModal={showModal} />
          </StyledModal>
     </Overlay>
   )
@@ -106,7 +114,10 @@ else if(type === "deleteRequest"){
     <Overlay>
         <StyledModal ref={ref}>
             <Button onClick={() => showModal(false)}>❌</Button>
-            <ConfirmDelete resourceName="request" disabled={isDeletingRequest} onConfirm={() => deleteRequest(id)} showModal={showModal} />
+            <ConfirmDelete resourceName="request" disabled={isDeletingRequest} onConfirm={()=>{deleteRequest(id); 
+   setTimeout(() => {
+    deleteGuest(email)
+   }, 2000);}} showModal={showModal} />
          </StyledModal>
     </Overlay>
   )
@@ -118,5 +129,5 @@ EditCabinModal.propTypes = {
     showModal: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.any,
-
+    email: PropTypes.string,
   };

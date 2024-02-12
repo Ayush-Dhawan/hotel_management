@@ -88,7 +88,7 @@ function BookingDetail() {
         </Button>
       </ButtonGroup>
 
-      {showForm && <EditCabinModal showModal={setShowForm}  type={modalType} id={bookingId} />}
+      {showForm && <EditCabinModal showModal={setShowForm}  type={modalType} id={bookingId} email={booking.guests.email} />}
     </>
   );
 }

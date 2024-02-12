@@ -121,7 +121,7 @@ function RequestRow({request}) {
       <Button disabled={isConfirmingRequest || isDeletingRequest} onClick={handleConfirm} >Confirm</Button>
       <Button disabled={isConfirmingRequest || isDeletingRequest} onClick={() => {setShowModal(!showModal); setModalType((modalType) =>"deleteRequest")}}  type="decline" >Decline</Button>
     </Table.Row>
-    {showModal && <EditCabinModal type={modalType} showModal={setShowModal} id={reqestId} />}
+    {showModal && <EditCabinModal type={modalType} showModal={setShowModal} id={reqestId} email={email} />}
     </>
   );
 }
