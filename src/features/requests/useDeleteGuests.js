@@ -12,7 +12,6 @@ export default function useDeleteGuests(){
         mutationFn: (email) => deleteGuestApi(email),
 
         onSuccess: () =>{
-            toast.success("guest deleted")
             queryClient.invalidateQueries({active: true})
         },
 
