@@ -50,3 +50,32 @@ export async function userLogout(){
     throw new Error(error.message);
   }
 }
+
+export async function updateCurrUser({ fullName, password, avatar}){
+
+  let updateData;
+  if(password) updateData = {password}
+  if(fullName) updateData = {data: {fullName}}
+  
+  const { data, error } = await supabase.auth.updateUser(updateData)
+  if(!avatar) return data;
+  if(error) throw new Error(error.message);
+
+  //uploading avatar
+  const fileName = `avatar-${data.user.id}-${Math.random()}`;
+  const {error: storageError} = await supabase.storage.from("avatars").upload(fileName, avatar)
+
+  if(storageError) throw new Error(storageError.message);
+
+  //update avatar in user
+
+  //https://jaaramkfipybtkkixsmc.supabase.co/storage/v1/object/public/avatars/imageName.jpg?t=2024-02-17T17%3A23%3A23.215Z
+  const {data: updatedUser, error: error2} = await supabase.auth.updateUser({
+    data: {
+      avatar: `https://jaaramkfipybtkkixsmc.supabase.co/storage/v1/object/public/avatars/${fileName}`
+    }
+  })
+
+  if(error2) throw new Error(error2.message);
+  return updatedUser;
+}
