@@ -22,7 +22,7 @@ import { CABIN_TABLE_SIZE, PAGE_SIZE } from "../../utils/constants";
 
 const TableHeader = styled.header`
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
+  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1.5fr;
   column-gap: 2.4rem;
   align-items: center;
 
@@ -82,7 +82,7 @@ const cabinsInRange = sortedValues?.slice(from, to+1) //render the slice of tota
 
   if(isLoading) return <Spinner />
   return <Menus>
-     <Table role = "table" columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+     <Table role = "table" columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1.5fr">
     <TableHeader role = "row">
       <div></div>
       <div>Cabin</div>

@@ -12,7 +12,7 @@ export default function useUpdateUser() {
         onSuccess: ({user}) => {
           // setShowForm((showForm) => !showForm)
           toast.success("User successfully updated");
-          queryClient.setQueryData("user", user)
+          // queryClient.setQueryData(["user"], user)
           queryClient.invalidateQueries({ queryKey: ["user"] });
         },
         onError: (err) => toast.error(err.message),

@@ -13,6 +13,7 @@ import Modal from "../../ui/Modal"
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 
 
 // const TableRow = styled.div`
@@ -54,6 +55,31 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+const StyledButton = styled.button`
+  width: 25%;
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1.4rem;
+  /* transition: all 0.2s; */
+
+  /* display: flex;
+  align-items: center;
+  gap: 1.6rem; */
+
+  &:hover {
+    background-color: var(--color-grey-50);
+  }
+
+  /* & svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--color-grey-400);
+    transition: all 0.3s;
+  } */
+`;
+
 
 
 const CabinRow = ({ cabin }) => {
@@ -80,10 +106,11 @@ const {isDeleting, deleteCabin} = useDeleteCabin();
         <Price>{ formatCurrency(regularPrice) }</Price>
         <Discount>{formatCurrency(discount)}</Discount>
         <div>
-          <button disabled={isCreating} onClick={handleDuplicate}>©️</button>
-          <button onClick={() =>{ setShowForm(!showForm); setModalType((modalType) => "edit")}}>📝</button>
+          {/* <button disabled={isCreating} onClick={handleDuplicate}>©️</button> */}
+          <StyledButton disabled={isCreating} onClick={handleDuplicate}><HiSquare2Stack /></StyledButton>
+          <StyledButton onClick={() =>{ setShowForm(!showForm); setModalType((modalType) => "edit")}}><HiPencil /></StyledButton>
           {/* <button ><EditCabin /></button> */}
-        <button onClick={() =>{ setShowForm(!showForm); setModalType((modalType) => "delete")}} disabled={isDeleting}>🗑️</button>
+        <StyledButton onClick={() =>{ setShowForm(!showForm); setModalType((modalType) => "delete")}} disabled={isDeleting}><HiTrash /></StyledButton>
         {/* <Modal.Window>
           <ConfirmDelete resourceName="cabins" disabled={isDeleting} onConfirm={() => deleteCabin(cabinid)} />
         </Modal.Window> */}
