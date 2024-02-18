@@ -79,3 +79,15 @@ export async function updateCurrUser({ fullName, password, avatar}){
   if(error2) throw new Error(error2.message);
   return updatedUser;
 }
+
+export async function recoverPassword({email}){
+  
+    let { data, error } = await supabase.auth.resetPasswordForEmail(email)
+    if(!email){
+      console.log("email wasnt sent to recover")
+      return
+    }
+    if(error) throw new Error(error.message);
+    console.log("data from recover -> ", data)
+    return data;
+}
