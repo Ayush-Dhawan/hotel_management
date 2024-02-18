@@ -18,7 +18,7 @@ font-size: 1rem;
 font-weight: 500;
 /* background-color: var(--color-brand-500); */
 background-color: ${(props) => (props.type === 'decline' ? '#dc3545' : 'var(--color-brand-500)')};
-color: var(--color-grey-200);
+color: white;
 border: none;
 border-radius: 10px;
 width: 5.5rem;

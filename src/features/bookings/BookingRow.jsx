@@ -13,10 +13,11 @@ const Button = styled.button`
 font-size: 1rem;
 font-weight: 500;
 background-color: var(--color-brand-500);
-color: var(--color-grey-200);
+color: white;
 border: none;
 border-radius: 10px;
 width: 5.5rem;
+padding: 12%;
 font-family: "Sono";
 
   &:hover{
@@ -100,7 +101,7 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-      <Button onClick={() => navigate(`/bookings/${bookingId}`)}>See Details</Button>
+      <Button onClick={() => navigate(`/bookings/${bookingId}`)}>DETAILS</Button>
     </Table.Row>
   );
 }
