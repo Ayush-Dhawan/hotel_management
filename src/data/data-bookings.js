@@ -16,7 +16,7 @@ export const bookings = [
     guestId: 2,
     hasBreakfast: true,
     observations:
-      'I have a gluten allergy and would like to request a gluten-free breakfast.',
+      'i would love to get a ppickup-drop service from the airport',
     isPaid: false,
     numGuests: 1,
   },
@@ -177,7 +177,7 @@ export const bookings = [
     endDate: fromToday(-1),
     cabinId: 5,
     guestId: 16,
-    hasBreakfast: false,
+    hasBreakfast: true,
     observations: '',
     isPaid: true,
     numGuests: 6,
@@ -263,7 +263,7 @@ export const bookings = [
     guestId: 1,
     hasBreakfast: true,
     observations:
-      'My wife has a gluten allergy so I would like to request a gluten-free breakfast if possible',
+      'I would like to be given a car on rental basis if its possible.',
     isPaid: true,
     numGuests: 9,
   },
