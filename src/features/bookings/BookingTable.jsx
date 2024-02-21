@@ -12,7 +12,6 @@ import {useNavigate} from 'react-router-dom'
 function BookingTable() {
   const navigate = useNavigate();
   const {bookings, isLoading} = useBookings();
-  console.log(bookings)
   const [searchParams, setSearchParams] = useSearchParams();
 
   const status = searchParams.get("status") || "all"
@@ -25,22 +24,13 @@ function BookingTable() {
     filteredValues = bookings
   }
   else if(status === "checked-out"){
-    // searchParams.set("status", "checked-out")
-    // searchParams.set('page', 1)
-    // setSearchParams(searchParams)
     filteredValues = bookings.filter(booking => booking.status === "checked-out")
   }
   else if(status === "checked-in"){
-    // searchParams.set("status", "checked-in")
-    // searchParams.set('page', 1)
-    // setSearchParams(searchParams)
     filteredValues = bookings.filter(booking => booking.status === "checked-in")
 
   }
   else if(status === "unconfirmed"){
-    // searchParams.set("status", "unconfirmed")
-    // searchParams.set('page', 1)
-    // setSearchParams(searchParams)
     filteredValues = bookings.filter(booking => booking.status === "unconfirmed")
   }
 
@@ -68,9 +58,6 @@ function BookingTable() {
  }
 
  const bookingsInRange = sortedValues?.slice(from, to+1)
-
-
-
 
   // if(!bookings.length) return <Empty resource = "bookings" />
   if(isLoading) return <Spinner />

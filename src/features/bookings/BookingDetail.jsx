@@ -16,6 +16,7 @@ import { useCheckout } from "./useCheckout";
 import { useDeleteBookings } from "./useDeleteBookings";
 import { useState } from "react";
 import EditCabinModal from "../../ui/EditCabinModal";
+import Empty from "../../ui/Empty";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -36,6 +37,8 @@ function BookingDetail() {
     bookingId = booking?.id ||1;
     status = booking?.status || "unconfirmed";
   }
+
+  // if(!booking) return <Empty resource="booking" />
 
   const {checkout, isCheckingOut} = useCheckout();
   const {deleteBooking, isDeleting} = useDeleteBookings();

@@ -5,8 +5,8 @@ import Input from "../../ui/Input";
 import { useForm } from 'react-hook-form';
 import { useSignUp } from "./useSignUp";
 import SpinnerMini from '../../ui/SpinnerMini'
-import Spinner from '../../ui/Spinner'
-import { useUser } from "./useUser";
+import {useNavigate} from 'react-router-dom'
+import {toast} from 'react-hot-toast'
 
 // Email regex: /\S+@\S+\.\S+/
 
@@ -14,11 +14,17 @@ function SignupForm() {
   const {signUp, isSiginingUp} = useSignUp();
  const {register, formState, getValues, handleSubmit, reset} =  useForm();
  const {errors} = formState;
+ const navigate = useNavigate();
 
  function onSubmit({fullName, email, password}){
     signUp({fullName, email, password}, {
-      onSettled: () => reset()
+      onSettled: () => {
+        reset();
+        navigate('/login');
+        toast.success("Confirm your identity again before adding more admins")
+      }
     })
+
  }
 
 
