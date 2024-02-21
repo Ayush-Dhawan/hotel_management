@@ -38,7 +38,7 @@ function SignupForm() {
         {...register("password", {required: "This field is required", minLength: {value: 8, message: "Password should be atleast 8 characters long"}})} />
       </FormRow>
 
-      <FormRow label="Repeat password" error={errors?.passwordConfirm?.message}>
+      <FormRow label="Confirm password" error={errors?.passwordConfirm?.message}>
         <Input disabled={isSiginingUp}  type="password" id="passwordConfirm"
         {...register("passwordConfirm", {required: "This field is required", validate: (value) => value === getValues().password || "Passwords do not match" })} />
       </FormRow>
