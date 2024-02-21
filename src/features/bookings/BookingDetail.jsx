@@ -77,7 +77,7 @@ function BookingDetail() {
       Check-in
     </Button>}
     {status === 'checked-in' &&
-      <Button disabled={isCheckingOut} variation="primary" onClick={handleCheckout}>
+      <Button disabled={isCheckingOut} variation="primary" onClick={() =>{setShowForm(!showForm); setModalType((modalType) => "confirmCheckOut")}}>
       Check-out
     </Button>}
     <Button disabled={isDeleting} variation="secondary" onClick={() =>{setShowForm(!showForm); setModalType((modalType) => "deleteBooking")}}>

@@ -1,6 +1,13 @@
 import styled, { css } from "styled-components";
 
 const sizes = {
+  mini: css`
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+`,
   small: css`
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
