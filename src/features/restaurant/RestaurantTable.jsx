@@ -78,6 +78,32 @@ export default function RestaurantTable(){
 // }
 // const cabinsInRange = sortedValues?.slice(from, to+1) //render the slice of total values from and to+1
 
+const [searchParams, setSearchParams] = useSearchParams();
+const filterCategory = searchParams.get('category') || 'all';
+const filterType = searchParams.get('type') || 'all';
+
+let filteredCategoryData;
+if(filterCategory === 'all'){
+    filteredCategoryData = restaurantMenu
+}
+else if(filterCategory === 'veg'){
+  filteredCategoryData = restaurantMenu.filter((item) => item.category === 'VEG')
+}else{
+  filteredCategoryData = restaurantMenu.filter((item) => item.category === 'NON VEG')
+}
+
+let filteredTypeData;
+if(filterType === 'all'){
+  filteredTypeData = filteredCategoryData
+}
+else if(filterType === 'maincourse'){
+  filteredTypeData = filteredCategoryData.filter((item) => item.type === 'Main Course')
+}else if(filterType === 'starter'){
+  filteredTypeData = filteredCategoryData.filter((item) => item.type === 'Starter')
+}else if(filterType === 'dessert'){
+  filteredTypeData = filteredCategoryData.filter(item => item.type === 'Dessert')
+}
+
 
   if(isLoading) return <Spinner />
   return <Menus>
@@ -90,7 +116,7 @@ export default function RestaurantTable(){
       <div>Price</div>
       <div></div>
     </TableHeader>
-    <Table.Body data={restaurantMenu} render={(dish => <RestaurantRow dish={dish} key={dish.id} />)} />
+    <Table.Body data={filteredTypeData} render={(dish => <RestaurantRow dish={dish} key={dish.id} />)} />
     {/* {cabins.map(cabin => <CabinRow cabin={cabin} key={cabin.id} />)} */}
     {/* <Table.Footer>
       <Pagination count={sortedValues.length} SIZE={CABIN_TABLE_SIZE} />
