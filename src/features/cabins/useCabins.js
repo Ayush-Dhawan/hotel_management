@@ -8,6 +8,5 @@ export default function useCabins(){
         queryFn: getCabins,
         queryKey: ['cabins']
     })
-
     return {cabins, isLoading}
 }

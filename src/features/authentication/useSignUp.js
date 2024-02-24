@@ -10,8 +10,8 @@ export function useSignUp(){
         onSuccess: () =>{
             toast.success("Account succesfully created!...Please verify the account via the employee's email address")
         },
-        onError : () =>{
-            toast.error("Could not register the employee")
+        onError : (error) =>{
+            toast.error(error.message)
         }
     })
 

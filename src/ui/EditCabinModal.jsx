@@ -9,6 +9,8 @@ import { useDeleteBookings } from '../features/bookings/useDeleteBookings';
 import useDeleteRequest from '../features/requests/useDeleteRequest';
 import useDeleteGuests from '../features/requests/useDeleteGuests';
 import { useCheckout } from '../features/bookings/useCheckout';
+import CreateDishForm from '../features/restaurant/CreateDishForm';
+import useDeleteDish from '../features/restaurant/useDeleteDish';
 
 // import Button  from './Button';
 
@@ -63,12 +65,13 @@ const Button = styled.button`
 
 
 
-export default function EditCabinModal({showModal, cabin, type, id, email}) {
+export default function EditCabinModal({showModal, cabin, type, id, email, dish}) {
   const {isDeleting, deleteCabin} = useDeleteCabin();
   const {isDeletingRequest, deleteRequest} = useDeleteRequest()
   const {deleteGuest, isDeletingGuest} = useDeleteGuests();
   const {checkout, isCheckingOut}  = useCheckout();
   const {isDeleting: isDeletingBooking, deleteBooking} = useDeleteBookings();
+  const {deleteDish, isDeleting: isDeletingDish} = useDeleteDish();
 
   const ref = useRef();
 
@@ -89,7 +92,18 @@ if(type === "edit"){
          </StyledModal>
     </Overlay>
   )
-}  else if(type === "delete"){
+}
+else if(type === "edit-dish"){
+  return (
+    <Overlay>
+        <StyledModal ref={ref}>
+            <Button onClick={() => showModal(false)}>❌</Button>
+            <CreateDishForm  dishToEdit={dish} showEditModal={showModal}/>
+         </StyledModal>
+    </Overlay>
+  )
+}
+  else if(type === "delete"){
   return (
     <Overlay>
         <StyledModal ref={ref}>
@@ -98,7 +112,18 @@ if(type === "edit"){
          </StyledModal>
     </Overlay>
   )
-} else if(type === "deleteBooking"){
+} 
+else if(type === "delete-dish"){
+  return (
+    <Overlay>
+        <StyledModal ref={ref}>
+            <Button onClick={() => showModal(false)}>❌</Button>
+            <ConfirmDelete resourceName="dish" disabled={isDeletingDish} onConfirm={() => deleteDish(id)} showModal={showModal} />
+         </StyledModal>
+    </Overlay>
+  )
+}
+else if(type === "deleteBooking"){
   return (
     <Overlay>
         <StyledModal ref={ref}>
@@ -137,7 +162,8 @@ else if(type === "confirmCheckOut"){
 }
 
 EditCabinModal.propTypes = {
-    cabin: PropTypes.string.isRequired,
+    cabin: PropTypes.string,
+    dish: PropTypes.string,
     showModal: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.any,
