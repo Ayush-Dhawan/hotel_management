@@ -12,11 +12,11 @@ export default function useConfirmRequest() {
         mutationFn: (booking) => insertBooking(booking),
 
         onSuccess: () => {
-            toast.success(`Request successfully confirmed in`);
+            toast.success(`Request successfully accepted`);
             queryClient.invalidateQueries({ active: true });
             navigate("/requests");
         },
-        onError: () => toast.error("There was an error while confirming the booking"),
+        onError: () => toast.error("There was an error while accepting the request"),
     })
 
     return {confirmRequest, isConfirmingRequest}

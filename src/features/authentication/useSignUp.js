@@ -12,6 +12,7 @@ export function useSignUp(){
         },
         onError : (error) =>{
             toast.error(error.message)
+            // toast.success("Account succesfully created!...Please verify the account via the employee's email address")
         }
     })
 

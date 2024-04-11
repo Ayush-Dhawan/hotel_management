@@ -45,7 +45,7 @@ import {
       };
 
   
-    const [isPredictions, setIsPredictions] = useState(true);
+    const [isPredictions, setIsPredictions] = useState(false);
     // const data = OLDdata;
     const data2 = yearlyData;
     const years = Array.from(new Set(data2.map(data => data.year)));
@@ -103,7 +103,7 @@ import {
           <LineChart data={combinedData} >
             <CartesianGrid strokeDasharray={4} />
             <XAxis dataKey="month" tick={{fill: colors.text}} tickLine={{stroke: colors.text}} />
-            <YAxis dataKey="totalSales2" unit="$" tick={{fill: colors.text}} tickLine={{stroke: colors.text}} />
+            <YAxis dataKey="totalSales2" unit="$" tick={{fill: colors.text, fontSize: 14}} tickLine={{stroke: colors.text}} />
             <Tooltip  contentStyle={{backgroundColor: colors.background}} />
             {/* Line for year 1 data */}
             <Line type="monotone" dataKey="totalSales1" stroke="#c2410c" strokeWidth={3} name='2022' />
